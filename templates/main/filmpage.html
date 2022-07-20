@@ -1,0 +1,275 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link href="{% static 'css/filmandserial.css' %}" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+    <script src="{% static 'js/webtorrent.min.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <main class="content main bluebar" id="content">
+        <div class="container bluebar">
+            <div class="row">
+                <div class="p-4"></div>
+                <div class="col-1">
+{#                    <div class="position-relative">#}
+{#                        <button type="button">#}
+{#                            <a href="#" id="submitButton" class="gradient-text" style="margin: 10px;">add fav</a>#}
+{#                        </button>#}
+{#                        <div class="position-absolute top-0 start-50 translate-middle-x">#}
+{#                            <img src="{% static 'img/bookmark.svg' %}" width="45px" height="60px">#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+                <div class="col-2">
+                    <p class="title">{{ film.name }}</p>
+                </div>
+            </div>
+            <div class="row gx-1">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <img src="{{ film.screensaver_reference }}" width="304" height="430">
+                </div>
+                <div class="col-3">
+                    <ul class="filmdescriptioin">
+                        <li><p class="whitetext">genre</p></li>
+                        <li><p class="greytext">{% for genre in film.genre.all %}
+                            {% if not forloop.last %}
+                                {{ genre.name }},
+                            {% else %}
+                                {{ genre.name }}
+                            {% endif %}
+                        {% endfor %}</p></li>
+                        <li><p class="whitetext">director</p></li>
+                        <li><p class="greytext">Peyton Reed</p></li>
+                        <li><p class="whitetext">release</p></li>
+                        <li><p class="greytext">2008</p></li>
+                        <li><p class="whitetext">country</p></li>
+                        <li><p class="greytext">{% for country in film.country.all %}
+                            {% if not forloop.last %}
+                                {{ country.name }},
+                            {% else %}
+                                {{ country.name }}
+                            {% endif %}
+                        {% endfor %}</p></li>
+                    </ul>
+                </div>
+                <div class="col-5">
+                    <p class="description">{{ film.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="p-5"></div>
+                <div class="p-2"></div>
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div id="hero">
+                        <div id="output" class="player">
+                            <div id="progressBar"></div>
+                            <!-- The video player will be added here -->
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-1">
+                    <img src="{% static 'img/report.svg' %}">
+                    <div class="p-2"></div>
+                    <img src="{% static 'img/share.svg' %}">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="p-5"></div>
+            <div class="row">
+                <div class="col-12 youmaylike">
+                    <p class="youmayliketitle">You may like</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row gx-7">
+                <div class="p-4"></div>
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <img src="{% static 'img/picture.png' %}">
+                    <p class="thefilmtitle">The film title</p>
+                    <p class="thefilmgenres">film genres, film...</p>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'img/picture1.png' %}">
+                    <p class="thefilmtitle">The film title</p>
+                    <p class="thefilmgenres">film genres, film...</p>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'img/picture2.png' %}">
+                    <p class="thefilmtitle">The film title</p>
+                    <p class="thefilmgenres">film genres, film...</p>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'img/picture3.png' %}">
+                    <p class="thefilmtitle">The film title</p>
+                    <p class="thefilmgenres">film genres, film...</p>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'img/picture4.png' %}">
+                    <p class="thefilmtitle">The film title</p>
+                    <p class="thefilmgenres">film genres, film...</p>
+                </div>
+                <div class="col-1">
+                    <img src="{% static 'img/next.svg' %}" class="next">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="p-3"></div>
+            <div class="row">
+                <div class="col-12 communityreviews">
+                    <p class="youmayliketitle">Community reviews</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="p-4"></div>
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <p class="yourusername"><img src="{% static 'img/correct/profile-vector.svg' %}"
+                                                 class="accountlogo">Your
+                        username</p>
+                </div>
+                <div class="col-6">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-yellow.svg' %}" class="star">
+                    <img src="{% static 'img/rate-empty.svg' %}" class="star">
+                    <img src="{% static 'img/rate-empty.svg' %}" class="star">
+                    <img src="{% static 'img/rate-empty.svg' %}" class="star">
+                </div>
+                <div class="col-1 rate">
+                    <p>7/10</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="p-2"></div>
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <p class="enterreviewmessage">Enter review message</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <img src="{% static 'img/divider.svg' %}" class="mx-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="p-4"></div>
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <p class="yourusername"><img src="{% static 'img/correct/profile-vector.svg' %}"
+                                                 class="accountlogo">Username
+                    </p>
+                </div>
+                <div class="col-5"></div>
+                <div class="col-2">
+                    <p class="rate" align="center"><img src="{% static 'img/rate-yellow.svg' %}" class="userstar">2/10
+                    </p>
+                </div>
+                <div class="col-1">
+                    <img src="{% static 'img/report.svg' %}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <p class="reviewmessage">Text text text text text text text text text text text text text text text
+                        text
+                        text text text text text text text text text text text text text text text text text text text
+                        text
+                        text text text text text text text text text text text text text text text text text text text
+                        text
+                        text text text text text text text text text text text text text text text text text text text
+                        text
+                        text text text</p>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+
+        let client = new WebTorrent();
+        let torrentId = "{{ film.magnet_reference }}"
+        client.add(torrentId, function (torrent) {
+
+            // Torrents can contain many files. Let's use the .mp4 file
+            const file = torrent.files.find(function (file) {
+                return file.name.endsWith('.mp4')
+            })
+
+            // Stream the file in the browser
+            file.appendTo('#output')
+        })
+
+        function getCookie(c_name) {
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=");
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                    if (c_end == -1) c_end = document.cookie.length;
+                    return unescape(document.cookie.substring(c_start, c_end));
+                }
+            }
+            return "";
+        }
+
+        document.querySelector("button").addEventListener("click", () => {
+            const movie_type = window.location.href.split("/")[3]
+            const movie_id = window.location.href.split("/")[4]
+
+            console.log(window.location.href)
+            data = {movie_type: movie_type, movie_id: movie_id}
+            $.ajax({
+                type: "POST",
+                url: '/api/v1/delFavFilm',
+                dataType: "json",
+                contentType: 'application/json',
+
+                data: JSON.stringify(data),
+                credentials: 'include',
+                headers: {"X-CSRFToken": getCookie("csrftoken")},
+                success: (response) => {
+                    console.log(response)
+                    if (response.status == true) {
+                        window.location.replace(`/account/`)
+
+                    } else {
+                        console.log('пароли не совпадают');
+
+                    }
+                }
+            });
+
+
+        })
+    </script>
+
+{% endblock %}

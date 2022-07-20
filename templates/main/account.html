@@ -1,0 +1,127 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+    FuNCode Cinema Account
+{% endblock %}
+
+{% block extra_head %}
+    <link href="{% static 'css/account.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="photo_profil">
+            <img src="{% static 'img/correct/profile-vector.svg' %}" width="250" height="250" title="Your photo">
+            <h2>{{user.username}}</h2>
+            <h3>{{user.email}}</h3>
+            <p>change profile picture</p>
+        </div>
+        <div class="films_profile">
+            <h1><a href="#">To-watch</a></h1>
+            <div class="to_watch"></div>
+            <h1><a href="#">Favourites</a></h1>
+            <div class="favourites"></div>
+            <h1><a href="#">Watched</a></h1>
+            <div class="watched"></div>
+        </div>
+        <div class="settings">
+            <h1>Settings</h1>
+            <div class="name_block account_details">
+                <h2>Account details</h2>
+                <div class="row settings_row" id="e-mail">
+                    <div class="col-3 title">E-mail</div>
+                    <div class="col text">{{user.email}}</div>
+                </div>
+                <div class="row settings_row" id="password">
+                    <div class="col-3 title">Password</div>
+                    <div class="col-6 text">User's password</div>
+                    <div class="col button">change password</div>
+                </div>
+            </div>
+            <div class="name_block account_managment">
+                <h2>Account managment</h2>
+                <div class="row settings_row" id="sign_out">
+                    <div class="col button_title">Sign out</div>
+                </div>
+            </div>
+        </div>
+        <div class="delete_block">
+            <div class="row delete_row">
+                <div class="col-3">
+                    <div class="delete_button">Delete account</div>
+                </div>
+                <div class="col delete_text">
+                    When you delete an account, all data will be deleted, <br>
+                    including account profiles, browsing history <br>
+                    and favourites for each profile
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+
+        function getString(text, length) {
+            if (text.length <= length) {
+                return text;
+            } else {
+                return text.slice(0, length - 1) + "...";
+            }
+        }
+
+        //Заполнение сетки фильмов
+        function create_object() {
+            let object = document.createElement('figure');
+            object.className = "col film_object";
+            //img
+            let img = document.createElement('img');
+            img.src = 'static/data/anime.jfif';
+            img.title = 'Похороны Короля Роз';
+            img.className = 'poster';
+            object.append(img);
+            //h2
+            let link = document.createElement('a');
+            link.className = 'film_link';
+            link.href = '/account/';
+            let h2 = document.createElement('p');
+            h2.className = 'film_title';
+            h2.innerText = getString("Похороны Короля Роз", 13);
+            link.append(h2);
+            object.append(link);
+            //h3
+            h3 = document.createElement('p');
+            h3.className = 'film_genres';
+            h3.innerText = getString("Сверхестественное, Драма, Экшен", 17);
+            object.append(h3);
+            return object;
+        }
+
+        function add_arrow() {
+            let img = document.createElement('img');
+            img.className = "arrow"
+            img.src = '{% static "/img/correct/moderator panel/next.svg" %}';
+            img.title = 'Arrow';
+            return img;
+        }
+
+        var main = document.querySelector('div.to_watch');
+        for (var i = 0; i < 4; i++) {
+            main.append(create_object());
+        }
+        main.append(add_arrow());
+        var main = document.querySelector('div.favourites');
+        for (var i = 0; i < 4; i++) {
+            main.append(create_object());
+        }
+        main.append(add_arrow());
+
+        var main = document.querySelector('div.watched');
+        for (var i = 0; i < 4; i++) {
+            main.append(create_object());
+        }
+        main.append(add_arrow());
+
+    </script>
+{% endblock %}

@@ -1,0 +1,8 @@
+asgiref
+Django
+django-utils
+django-utils-six
+pytz
+sqlparse
+gunicorn
+psycopg2-binary

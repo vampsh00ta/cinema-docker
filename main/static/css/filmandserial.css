@@ -1,0 +1,256 @@
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    outline: 0;*/
+/*    outline-offset: 0;*/
+/*}*/
+
+
+.title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #E3DEDE;
+}
+
+.whitetext {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 30px;
+    text-decoration-line: underline;
+
+    color: #E3DEDE;
+}
+
+.greytext {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+
+    color: #808080;
+}
+
+.filmdescriptioin {
+    list-style-type: none;
+}
+
+.description {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 29px;
+    line-height: 35px;
+
+    color: #E3DEDE;
+}
+
+.seasonchoose {
+    background-image: url(../img/season-grad-choose1.png);
+}
+
+.seasonchoose ul li {
+    display: inline-block;
+}
+
+.season {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #E3DEDE;
+
+    margin-top: 15px;
+}
+
+.seasonnumber {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #E3DEDE;
+
+    margin-left: 65px;
+    margin-top: 15px;
+}
+
+.serieschoose {
+    background-image: url(../img/season-grad-choose2.png);
+}
+
+.serieschoose ul li {
+    display: inline-block;
+}
+
+.series {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #E3DEDE;
+
+    margin-top: 15px;
+}
+
+.seriesnumber {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #E3DEDE;
+
+    margin-left: 65px;
+    margin-top: 15px;
+}
+
+.report {
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    padding: 15px;
+    border: 3px solid #0000cc;
+    border-radius: 10px;
+    color: #0000cc;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.youmaylike {
+    background-image: url(../img/mesh-gradient-youmaylike.png);
+}
+
+.youmayliketitle {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 35px;
+    line-height: 48px;
+    background: none;
+    color: #E3DEDE;
+    margin-top: 25px;
+    margin-left: 50px;
+
+}
+
+.thefilmtitle {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #E3DEDE;
+
+    margin-top: 5px;
+}
+
+.thefilmgenres {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #808080;
+
+    margin-top: -12px;
+}
+
+.next {
+    position: relative;
+    top: 135px;
+}
+
+.communityreviews {
+    background-image: url(../img/сommunityreviews.png);
+}
+
+.accountlogo {
+    border-radius: 50%;
+
+    margin-right: 30px;
+}
+
+.yourusername {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 30px;
+
+    color: #E3DEDE;
+}
+
+.star1 {
+    margin-left: 53px;
+}
+
+.star {
+    margin-left: 8px;
+}
+
+.rate {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: 0.05em;
+
+    color: #E3DEDE;
+
+    position: relative;
+    top: 7px;
+}
+
+.enterreviewmessage {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 30px;
+
+    color: #E3DEDE;
+
+    margin-left: 75px;
+}
+
+.userstar {
+    margin-right: 15px;
+}
+
+.reviewmessage {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+
+    color: #E3DEDE;
+
+    margin-left: 75px;
+}
+
+
+

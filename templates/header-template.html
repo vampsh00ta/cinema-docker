@@ -1,0 +1,111 @@
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<nav class="navbar navbar-expand header">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'img/logo.png' %}" width="250px" height="60px">
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="nav-item header-block films">
+                    <a class="nav-link header-link"><h2>Genres</h2></a>
+                    <div class="genres" id="genres">
+                        <div class="row">
+                            <div class="col-3 object" id="action">Action</div>
+                            <div class="col-3 object" id="adventure">Adventure</div>
+                            <div class="col-3 object" id="animation">Animation</div>
+                            <div class="col-3 object" id="biography">Biography</div>
+                            <div class="col-3 object" id="comedy">Comedy</div>
+                            <div class="col-3 object" id="crime">Crime</div>
+                            <div class="col-3 object" id="documentary">Documentary</div>
+                            <div class="col-3 object" id="drama">Drama</div>
+                            <div class="col-3 object" id="family">Family</div>
+                            <div class="col-3 object" id="fantasy">Fantasy</div>
+                            <div class="col-3 object" id="history">History</div>
+                            <div class="col-3 object" id="horror">Horror</div>
+                            <div class="col-3 object" id="kids">Kids</div>
+                            <div class="col-3 object" id="music">Music</div>
+                            <div class="col-3 object" id="mystery">Mystery</div>
+                            <div class="col-3 object" id="reality">Reality</div>
+                            <div class="col-3 object" id="romance">Romance</div>
+                            <div class="col-3 object" id="science_fiction">Science fiction</div>
+                            <div class="col-3 object" id="thriller">Thriller</div>
+                            <div class="col-3 object" id="tv_movie">TV Movie</div>
+                            <div class="col-3 object" id="war">War</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav">
+                <li class="nav-item">
+                    <form class="search">
+                        <label class="search">
+                            <input type="search" placeholder="Search...">
+                            <img src="{% static 'img/correct/search-vector.svg' %}" class="icon" width="30px"
+                                 height="30px"
+                                 title="Search">
+                        </label>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <img src="{% static 'img/message.svg' %}" height="30px" width="30px">
+                    </a>
+                </li>
+                <li class="nav-item account">
+                    <a class="nav-link" href="#">
+                        <img src="{% static 'img/correct/profile-vector.svg' %}" height="30px" width="30px">
+                    </a>
+                    <div class="account_menu">
+                        <div class="row"><a href="/account/">Your profile</a></div>
+                        <div class="row exit">
+                            <div class="col-6" id="sign-out"><a href=#>Sign out</a></div>
+                            <div class="col"><img src="{% static 'img/correct/exit.svg' %}" height="17" width="18">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <script>
+    console.log('data')
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
+
+    document.querySelector("#sign-out").addEventListener("click", () => {
+
+        $.ajax({
+            type: "POST",
+            url: "/api/v2/logOut",
+            dataType: "json",
+            contentType: 'application/json',
+
+            credentials: 'include',
+            headers: {"X-CSRFToken": getCookie("csrftoken")},
+            success: (response) => {
+                console.log(response)
+                if (response == 200) {
+                    window.location.replace("/")
+                } else if (response.login_pass == null) {
+                    console.log("неправильный пароль");
+                }
+            }
+        });
+    })
+
+</script>

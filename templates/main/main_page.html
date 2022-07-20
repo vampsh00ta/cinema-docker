@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link href="{% static 'css/main_page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <div class="row justify-content-around">
+            {% for film in films %}
+                <a class="col-2 bg-dark m-1 mt-3 mb-2 card-link" href="{% url 'film_detail' film.id %}">
+                    <img class="card-img p-2" src="{{ film.screensaver_reference }}">
+                    <div class="card-body text-center">
+                        <h3>{{ film.name }}</h3>
+                        <p> {% for genre in film.genre.all %}
+                            {% if not forloop.last %}
+                                {{ genre.name }},
+                            {% else %}
+                                {{ genre.name }}
+                            {% endif %}
+                        {% endfor %}  </p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
