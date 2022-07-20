@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,15 +29,13 @@ python -c 'from django.core.management.utils import get_random_secret_key; \
             print(get_random_secret_key())'
 
 """
-SECRET_KEY = 'django-insecure-ucpj$f1erq3gtho9g3%zon*peryi0zv%c*4oh5riw%daab*$uw'
+print(os.getenv("SECRET_KEY"))
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'fnc-cinema.herokuapp.com',
-]
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 

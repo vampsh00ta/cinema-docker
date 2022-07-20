@@ -6,3 +6,5 @@ pytz
 sqlparse
 gunicorn
 psycopg2-binary
+python-dotenv
+djangorestframework
