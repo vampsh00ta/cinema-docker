@@ -142,11 +142,10 @@ def sign_in_page(request):
 
 
 def sign_up_email(request):
-    email = request.COOKIES.get('email')
+    email = request.session.get('email')
     if email:
-        response = render(request, 'main/sign-up-email.html', {'email': email})
-        response.delete_cookie('email')
-        return response
+        del request.session['email']
+        return render(request, 'main/sign-up-email.html', {'email': email})
     return redirect('/')
 
 

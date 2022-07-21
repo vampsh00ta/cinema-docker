@@ -66,13 +66,13 @@ def signUp(request):
     send_mail(
         mail_subject,
         message,
-        'opiumgang111@yandex.ru',
+        'trofimov.vlad-1234@yandex.ru',
         [data['email']],
         fail_silently=False,
     )
 
     request.session['email'] = data['email']
-    return HttpResponse(status=status.HTTP_200_OK)
+    return HttpResponse(200)
 
 @api_view(['POST'])
 @login_required()
@@ -156,7 +156,7 @@ def passRecovery(request):
         send_mail(
             mail_subject,
             message,
-            'opiumgang111@yandex.ru',
+            'trofimov.vlad-1234@yandex.ru',
             [data['email']],
             fail_silently=False,
         )

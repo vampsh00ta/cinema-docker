@@ -29,13 +29,13 @@ python -c 'from django.core.management.utils import get_random_secret_key; \
             print(get_random_secret_key())'
 
 """
-print(os.getenv("SECRET_KEY"))
+
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 # Application definition
 
@@ -93,14 +93,25 @@ WSGI_APPLICATION = 'cinema.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': "d1kd0dg941mcu1",
+#         'USER': "dprkgmhaelhnah",
+#         'PASSWORD': "80028ca9aa826b9e8a2939e53acaa702d369a0e1db71a5cce9bf0955625b075f",
+#         'HOST': "ec2-23-23-151-191.compute-1.amazonaws.com",
+#         'PORT': "5432",
+#
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "d1kd0dg941mcu1",
-        'USER': "dprkgmhaelhnah",
-        'PASSWORD': "80028ca9aa826b9e8a2939e53acaa702d369a0e1db71a5cce9bf0955625b075f",
-        'HOST': "ec2-23-23-151-191.compute-1.amazonaws.com",
-        'PORT': "5432",
+        'NAME': os.getenv("SQL_DATABASE"),
+        'USER': os.getenv("SQL_USER"),
+        'PASSWORD': os.getenv("SQL_PASSWORD"),
+        'HOST': os.getenv("SQL_HOST"),
+        'PORT': os.getenv("SQL_PORT"),
 
     }
 }
@@ -143,12 +154,12 @@ AUTH_USER_MODEL = 'main.Customer'
 
 LOGIN_URL = '/sign-in-page'
 #Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'opiumgang111@yandex.ru'
-EMAIL_HOST_PASSWORD = '1234fasdfasdcfa'
+EMAIL_HOST_USER = 'trofimov.vlad-1234@yandex.ru'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
 EMAIL_PORT = 587
 
 # Static files (CSS, JavaScript, Images)
