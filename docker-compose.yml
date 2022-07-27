@@ -21,6 +21,13 @@ services:
       - POSTGRES_PASSWORD=80028ca9aa826b9e8a2939e53acaa702d369a0e1db71a5cce9bf0955625b075f
       - POSTGRES_HOST=ec2-23-23-151-191.compute-1.amazonaws.com
       - POSTGRES_PORT=5432
-
+  nginx:
+    image: nginx:1.19.8-alpine
+    depends_on:
+      - django
+    ports:
+      - "80:80"
+    volumes:
+      - static_data:/usr/bin/
 volumes:
   postgres_data:

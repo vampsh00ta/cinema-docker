@@ -29,6 +29,10 @@ urlpatterns = [
     path('activate/<slug:uidb64>/<slug:token>/', views.activate, name='activate'),
     path('reset/<slug:uidb64>/<slug:token>/', views.set_recovery_pass, name='reset'),
 
-    path('about', views.main_page, name='about')
+    path('about', views.main_page, name='about'),
+
+
+
+    path('slatt',views.slatt)
 
 ]

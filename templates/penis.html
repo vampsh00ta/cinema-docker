@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+let loginUser = async()=>{
+    let response = await fetch('http://127.0.0.1:8000/api/v2/token/',{
+        method:"POST",
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({email: 'group1@mail.com',password: 'group1'})
+    })
+    let data = await response.json()
+    const access = data.access
+    localStorage.setItem('access_token',access);
+    console.log(access)
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+    console.log(axios.defaults.headers.common['Authorization'])
+    response = await fetch('http://127.0.0.1:8000/api/v2/get/',{
+        method:"GET",
+        headers:{
+            'Content-Type':'application/json',
+            'Authorization':`Bearer ${localStorage.getItem('access_token')}`
+        },
+    })
+    data = await response.json()
+    console.log(data)
+
+
+}
+
+loginUser()
+
+
+</script>
+</html>

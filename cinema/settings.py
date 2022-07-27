@@ -9,13 +9,10 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from datetime import timedelta
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
 
-
-load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,13 +26,67 @@ python -c 'from django.core.management.utils import get_random_secret_key; \
             print(get_random_secret_key())'
 
 """
-
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = 'django-insecure-ucpj$f1erq3gtho9g3%zon*peryi0zv%c*4oh5riw%daab*$uw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+REST_USE_JWT = True
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework.permissions.IsAuthenticated',
+        ]
+
+}
+
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+    'JWK_URL': None,
+    'LEEWAY': 0,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'fnc-cinema.herokuapp.com',
+]
 
 # Application definition
 
@@ -50,6 +101,11 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'api.apps.ApiConfig',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'djoser',
+
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -60,6 +116,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'cinema.urls'
@@ -93,25 +151,14 @@ WSGI_APPLICATION = 'cinema.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': "d1kd0dg941mcu1",
-#         'USER': "dprkgmhaelhnah",
-#         'PASSWORD': "80028ca9aa826b9e8a2939e53acaa702d369a0e1db71a5cce9bf0955625b075f",
-#         'HOST': "ec2-23-23-151-191.compute-1.amazonaws.com",
-#         'PORT': "5432",
-#
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv("SQL_DATABASE"),
-        'USER': os.getenv("SQL_USER"),
-        'PASSWORD': os.getenv("SQL_PASSWORD"),
-        'HOST': os.getenv("SQL_HOST"),
-        'PORT': os.getenv("SQL_PORT"),
+        'NAME': "d1kd0dg941mcu1",
+        'USER': "dprkgmhaelhnah",
+        'PASSWORD': "80028ca9aa826b9e8a2939e53acaa702d369a0e1db71a5cce9bf0955625b075f",
+        'HOST': "ec2-23-23-151-191.compute-1.amazonaws.com",
+        'PORT': "5432",
 
     }
 }
@@ -154,12 +201,12 @@ AUTH_USER_MODEL = 'main.Customer'
 
 LOGIN_URL = '/sign-in-page'
 #Email
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'trofimov.vlad-1234@yandex.ru'
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
+EMAIL_HOST_USER = 'opiumgang111@yandex.ru'
+EMAIL_HOST_PASSWORD = '1234fasdfasdcfa'
 EMAIL_PORT = 587
 
 # Static files (CSS, JavaScript, Images)
